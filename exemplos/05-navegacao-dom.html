@@ -1,0 +1,89 @@
+<meta charset="utf-8" />
+<h1>JavaScript: navegação na DOM</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Cidade</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Mariana Rodrigues</td>
+            <td>mariana@uol.com.br</td>
+            <td>São Paulo</td>
+            <td><button class="editar">Editar</button></td>
+            <td><button class="excluir">Excluir</button></td>
+        </tr>
+        <tr>
+            <td>Paulo Oliveira</td>
+            <td>paulo@bol.com.br</td>
+            <td>Rio de Janeiro</td>
+            <td><button class="editar">Editar</button></td>
+            <td><button class="excluir">Excluir</button></td>
+        </tr>
+        <tr>
+            <td>Anderson Silva</td>
+            <td>anderson@r7.com</td>
+            <td>Salvador</td>
+            <td><button class="editar">Editar</button></td>
+            <td><button class="excluir">Excluir</button></td>
+        </tr>
+        <tr>
+            <td>Ana Carolina Ribeiro</td>
+            <td>ana@g1.com.br</td>
+            <td>Belo Horizonte</td>
+            <td><button class="editar">Editar</button></td>
+            <td><button class="excluir">Excluir</button></td>
+        </tr>
+    </tbody>
+</table>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 60px;
+    }
+
+    table {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border-bottom: 2px solid #ddd;
+        border-right: 1px solid #ddd;
+        background: #eee;
+        text-align: left;
+        padding: 15px;
+    }
+
+    td {
+        background: white;
+        border-bottom-width: 1px;
+    }
+
+    td.editavel {
+        border-color: #ffa305;
+        color: #ffa305;
+        background: #fcf6eb;
+    }
+</style>
+
+<script>
+
+    const tabela = document.querySelector('table');
+
+    // exclusão de dados
+    tabela.addEventListener('click', function(event) {
+        let temClasseExcluir = event.target.classList.contains('excluir');
+        if (temClasseExcluir) {
+            const btnExcluir = event.target;
+            btnExcluir.closest('tr').remove();
+        }
+    });
+
+</script>
