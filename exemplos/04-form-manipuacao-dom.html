@@ -90,7 +90,7 @@
 
         for (let campo of camposObrigatorios)
         {
-            if (!campo.value) {
+            if (!campo.value.trim()) {
                 campo.classList.add('destacar');
                 let mensagem = campo.dataset.mensagem;
                 mensagensErro.push( mensagem );
