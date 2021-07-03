@@ -1,0 +1,137 @@
+<meta charset="utf-8" />
+<h1>JavaScript Básico</h1>
+<script>
+
+    /** 
+     * 'use strict' proibe:
+     *  1.) Declaração de variáveis de forma implícita (sem var/let/const)
+     *  2.) Uso do comando "with"
+     *  3.) Parâmetros duplicados em funções
+     *  4.) Modifica o comportamento do comando "this"
+    */
+    'use strict';
+
+    /**
+     * Variáveis com "var" possuem 2 escopos:
+     *  1.) Se a variável estiver dentro de uma função, então ela é local
+     *  2.) Caso contrário ela é global
+    */
+    var a = 888; // global
+    if (true) {
+        var b = 999; // global
+    }
+
+    console.log('O valor de "a" é:', a); // Ok
+    console.log('O valor de "b" é:', b); // Ok
+
+    function mostrarIdade() {
+        var idade = 17; // local
+        console.log('O valor de "idade" é: ', idade); // Ok
+    }
+
+    mostrarIdade();
+    // console.log('Idade fora da função:', idade); // ReferenceError
+    
+    /**
+     * Variáveis com "let" possuem escopo forte, ou seja, uma variável criada em qualquer tipo de bloco
+     * com o comando "let" vira uma variável local: if, while, for, escopo vazio, função... etc.
+     */
+    let c = 777; // global
+    if (true) {
+        let d = 666; // local
+    }
+
+    console.log('O valor de "c" é:', c); // Ok
+    // console.log('O valor de "d" é:', d); // ReferenceError
+
+    /**
+     * Constantes são declaradas com a palavra-chave "const"
+     */
+    const x = 0;
+    // x = 8; // TypeError
+
+    const listaNomes = ['Adriana', 'Fabiana', 'Paulo'];
+    listaNomes.push('Gabriel'); // adicionamos um nome ao final da lista
+    listaNomes.shift(); // remove o primeiro nome da lista
+    listaNomes[1] = 'Henrique'; // altera o segundo valor da lista
+
+    console.log(listaNomes);
+    // listaNomes = []; // TypeError
+
+
+    /**
+     * Objeto Literal
+     */
+    const pessoa = {
+        nome: 'João', // propriedade
+        idade: 35,
+        email: 'joao@teste.com.br',
+
+        // método
+        falar() {
+            console.log(this.nome + ' está falando...');
+        }
+    }
+
+    console.log('Nome da pessoa: ', pessoa.nome);
+    pessoa.falar();
+
+    pessoa.nome = 'Henrique';
+    pessoa.idade = 23;
+    pessoa.cidade = 'Barueri';
+
+    console.log(pessoa);
+
+    // pessoa = {}; // TypeError: não podemos reatribuir um valor à uma constante
+
+    // Funções em JavaScript
+
+    // Function Declaration (HOISTING)
+    somar(5, 6); // 11
+    function somar(valor1, valor2) {
+        console.log('Resultado: ', valor1 + valor2);
+    }
+    
+
+    // Function Expression (Ñ TEM HOISTING)
+    const subtrair = function(valor1, valor2) {
+        console.log('Resultado:', valor1 - valor2);
+    }
+    subtrair(8, 4); // 4
+
+    // Objeto Global (Window) = BOM (Browser Object Model)
+
+    {
+        function mostrarMensagem(msg)
+        {
+            console.log('Mensagem enviada: ', msg);
+        }
+
+        // exportando a função mostrarMensagem para o escopo global
+        window.mostrarMensagem = mostrarMensagem;
+    }
+
+    mostrarMensagem('Minha mensagem de teste');
+
+    // Eventos (Event Handlers x Event Listeners)
+
+    // dados.js
+    // window.onload = function() {
+    //     alert('Buscando dados no banco de dados...');
+    // }
+    function buscarDados() {
+        alert('Buscando dados no banco de dados...');
+    }
+    
+    window.addEventListener('load', buscarDados);
+
+    // emails.js
+    // window.onload = function() {
+    //     alert('Enviando e-mails para os clientes...');
+    // }
+    window.addEventListener('load', function() {
+        alert('Enviando e-mails para os clientes...');
+    });
+
+
+</script>

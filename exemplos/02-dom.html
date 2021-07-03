@@ -1,0 +1,60 @@
+<meta charset="utf-8" />
+<h1>JavaScript: querySelector e querySelectorAll</h1>
+<style>
+    p {
+        background-color: #f2f2f2;
+        border: 1px solid #ddd;
+        padding: 15px;
+    }
+
+    .vermelho {
+        background-color: #fff0f0;
+        border-color: red;
+        color: red;
+    }
+</style>
+
+<p>Parágrafo 1</p>
+<p class="vermelho">Parágrafo 2</p>
+<p>Parágrafo 3</p>
+<p>Parágrafo 4</p>
+<p class="vermelho">Parágrafo 5</p>
+<p class="vermelho">Parágrafo 6</p>
+<span class="vermelho">Meu span vermelho</span>
+<p>Parágrafo 7</p>
+<p>Parágrafo 8</p>
+<p>Parágrafo 9</p>
+<p id="p10">Parágrafo 10</p>
+
+<script>
+
+    const p10 = document.querySelector('#p10');
+    // p10.innerHTML = 'Trocando o <strong>texto</strong> do parágrafo 10';
+    p10.textContent = 'Trocando o <strong>texto</strong> do parágrafo 10';
+    p10.style.color = 'green';
+    p10.style.fontStyle = 'italic';
+    p10.style.fontSize = '20px';
+
+
+    const vermelhos = document.querySelectorAll('.vermelho');
+
+    // for
+    for (let indice = 0; indice < vermelhos.length; indice++) {
+        vermelhos[indice].textContent = "Trocando o texto dos vermelhos!";
+    }
+    
+    // for...of = Looping especializado para percorrer objetos iteráveis (Arrays, Strings, Map, Set, etc)
+    for (let vermelho of vermelhos) {
+        vermelho.textContent = "Trocando o texto com for...of";
+    }
+
+    // forEach() = Método que percorre listas que derivam do tipo Array
+    // Higher Order Functions (Array JavaScript)
+    vermelhos.forEach(function(vermelho, indice) {
+        vermelho.textContent = "Trocando o texto com o forEach...";
+    });
+
+    // Arrow Function
+    vermelhos.forEach(vermelho => vermelho.textContent = "Trocando o texto com o arrow functions...");
+
+</script>
