@@ -1,0 +1,32 @@
+<meta charset="utf-8" />
+<h1>JavaScript: Web Storage API</h1>
+
+<select id="tema">
+    <option value="">-- Selecione um tema --</option>
+    <option value="red">Vermelho</option>
+    <option value="blue">Azul</option>
+</select>
+
+<button id="btnReset">
+    Resetar Tema
+</button>
+
+<script>
+
+    const seletorTema = document.querySelector('#tema');
+    const btnReset = document.querySelector('#btnReset');
+
+    let temaSalvo = localStorage.getItem('TEMA_SELECIONADO');
+    document.body.style.backgroundColor = temaSalvo;
+
+    seletorTema.addEventListener('change', function() {
+        localStorage.setItem('TEMA_SELECIONADO', seletorTema.value);
+        document.body.style.backgroundColor = seletorTema.value;
+    });
+
+    btnReset.addEventListener('click', () => {
+        localStorage.removeItem('TEMA_SELECIONADO');
+        document.body.style.backgroundColor = '';
+    })
+
+</script>
