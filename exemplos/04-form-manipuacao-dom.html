@@ -103,7 +103,12 @@
         if (mensagensErro.length > 0)
         {
             // exibe as mensagens de erro
-            divMsg.innerHTML = "<strong>Atenção!</strong><br>" + mensagensErro.join('<br>');
+            // template string = ``
+            divMsg.innerHTML = `
+                <strong>Atenção!</strong>
+                <br>
+                ${mensagensErro.join('<br>')}
+            `;
             divMsg.classList.replace('msg-sucesso', 'msg-erro');
         }
         else 
