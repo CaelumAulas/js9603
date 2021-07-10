@@ -1,0 +1,103 @@
+<meta charset="utf-8">
+<h1>JavaScript: Acordeões</h1>
+
+<div class="acordeoes">
+    <div class="acordeao">
+        <h4>Acordeão 1</h4>
+        <div class="conteudo">
+            <div>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium odit aliquid neque cumque cum quos
+                eos! Impedit aut ab eos, voluptatum eligendi perferendis, iusto aliquam, nulla omnis veritatis aperiam
+                a. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed pariatur nisi aut, non dolor iusto, laboriosam dolores voluptates iure nam, harum provident veniam repellendus animi dolorum doloribus labore nihil numquam.
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus dolorem excepturi amet error id, porro vel eaque, distinctio laboriosam nobis deleniti dolor ab neque aliquam temporibus impedit maiores, reiciendis eius.
+            </div>
+        </div>
+    </div>
+
+    <div class="acordeao">
+        <h4>Acordeão 2</h4>
+        <div class="conteudo">
+            <div>
+                Fugiat velit sit deleniti, eius maxime laboriosam officiis exercitationem? Vel quasi perferendis,
+                dolorum aperiam vero esse voluptate obcaecati rerum ipsam. Consequatur exercitationem modi molestias
+                labore quo iure, quas rem facilis.
+            </div>
+        </div>
+    </div>
+
+    <div class="acordeao">
+        <h4>Acordeão 3</h4>
+        <div class="conteudo">
+            <div>
+                Vitae eaque dolorem dolores aut qui non et quibusdam ab doloribus explicabo temporibus autem veniam
+                tenetur quod nulla earum, impedit cupiditate deserunt perferendis asperiores minima! Sint delectus
+                voluptatum quibusdam sit?
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 16px;
+    }
+
+    .acordeoes {
+        width: 400px;
+    }
+
+    .acordeao {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+
+    h4 {
+        cursor: pointer;
+        background-color: #eee;
+        margin: 0;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .conteudo {
+        height: 0;
+        overflow: hidden;
+    }
+
+    .conteudo div {
+        padding: 20px;
+    }
+</style>
+
+<script>
+
+    const acordeoes = document.querySelector('.acordeoes');
+    const opcoesAnimacao = {
+        duration: 400,
+        fill: 'forwards'
+    }
+
+    acordeoes.addEventListener('click', function(event) {
+        if (event.target.tagName === 'H4') {
+            const divConteudo = event.target.nextElementSibling;
+            let animationHeight = divConteudo.firstElementChild.offsetHeight;
+
+            if (divConteudo.offsetHeight > 0) {
+                animationHeight = 0;
+            }
+
+            divConteudo.animate({ height: animationHeight + 'px' }, opcoesAnimacao);
+
+            const acordeaoAtual = divConteudo.parentElement;
+            for (let acordeao of acordeoes.children) {
+                if (acordeao != acordeaoAtual) {
+                    acordeao.lastElementChild.animate( { height: '0px' }, opcoesAnimacao );
+                }
+            }
+        }
+    });
+
+</script>

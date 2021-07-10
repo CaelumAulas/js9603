@@ -14,7 +14,11 @@
             <td>Mariana Rodrigues</td>
             <td>mariana@uol.com.br</td>
             <td>São Paulo</td>
-            <td><button class="editar">Editar</button></td>
+            <td>
+                <button class="editar">
+                    Editar
+                </button>
+            </td>
             <td><button class="excluir">Excluir</button></td>
         </tr>
         <tr>
@@ -75,6 +79,7 @@
 
 <script>
 
+    // guardamos a referência da tabela
     const tabela = document.querySelector('table');
 
     // exclusão de dados
@@ -83,6 +88,32 @@
         if (temClasseExcluir) {
             const btnExcluir = event.target;
             btnExcluir.closest('tr').remove();
+        }
+    });
+
+    // edição de dados
+    tabela.addEventListener('click', function(event) {
+        let temClasseEditar = event.target.classList.contains('editar');
+        if (temClasseEditar) {
+            const btnEditar = event.target;
+            let isConteudoEditavel = false;
+
+            if (btnEditar.textContent.trim() === 'Editar') {
+                btnEditar.textContent = 'Salvar Edição';
+                isConteudoEditavel = true;
+            }
+            else {
+                btnEditar.textContent = 'Editar';
+            }
+
+            /** @type {HTMLTableCellElement} */
+            let tdTio = btnEditar.parentElement.previousElementSibling;
+
+            while (tdTio !== null) {
+                tdTio.contentEditable = isConteudoEditavel;
+                tdTio.classList.toggle('editavel');
+                tdTio = tdTio.previousElementSibling;
+            }
         }
     });
 
