@@ -1,0 +1,40 @@
+<meta charset="utf-8" />
+<h1>AJAX Clássico</h1>
+
+<button id="btnCarregar">
+    Carregar
+</button>
+<button onclick="alert('Testando efeito do ajax sincrono')">
+    Teste
+</button>
+
+<div class="conteudoCarregado">
+    Os dados carregados serão mostrados aqui...
+</div>
+
+<script>
+
+    const btnCarregar = document.querySelector('#btnCarregar');
+    const divConteudo = document.querySelector('.conteudoCarregado');
+
+    btnCarregar.addEventListener('click', function() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://jhonatanjacinto.dev/teste.php');
+        xhr.send();
+        btnCarregar.disabled = true;
+        btnCarregar.textContent = 'Carregando...';
+        
+        xhr.addEventListener('load', function() {
+            btnCarregar.disabled = false;
+            btnCarregar.textContent = 'Carregar';
+            divConteudo.innerHTML = xhr.response;
+        });
+
+        xhr.addEventListener('error', function() {
+            btnCarregar.disabled = false;
+            btnCarregar.textContent = 'Carregar';
+            alert('Deu ruim no carregamento dos dados!');
+        });
+    });
+
+</script>

@@ -1,5 +1,11 @@
 const tabela = document.querySelector('#tabelaContatos');
 
+/**
+ * Adiciona um novo contato na tabela
+ * @param {string} nome Nome do contato
+ * @param {string} telefone Telefone do Contato
+ * @returns {void}
+ */
 export function adicionarContato(nome, telefone) {
     const tr = document.createElement('tr');
     tr.innerHTML = `

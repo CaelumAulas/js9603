@@ -1,3 +1,4 @@
+
 import { adicionarContato } from "./tabelaContatos.js";
 
 const formulario = document.querySelector('#formCadastro');
