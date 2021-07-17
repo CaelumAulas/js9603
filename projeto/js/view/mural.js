@@ -1,6 +1,22 @@
 const mural = document.querySelector('.mural');
+const cartaoModelo = document.querySelector('#template-cartao').content.firstElementChild;
+let numeroCartao = 0;
 
-export function toggleLayout() {
+/**
+ * Adiciona um novo cartão no mural
+ * @param {string} conteudo     Texto do cartão que será criado
+ * @return {void}
+ */
+export function adicionarCartao(conteudo)
+{
+    numeroCartao++;
+    const cartao = cartaoModelo.cloneNode(true);
+    cartao.innerHTML = cartao.innerHTML.replaceAll('{{NUMERO_CARTAO}}', numeroCartao).replace('{{CONTEUDO_CARTAO}}', conteudo);
+    mural.append(cartao);
+}
+
+export function toggleLayout() 
+{
     mural.classList.toggle('mural--linha');
 }
 
