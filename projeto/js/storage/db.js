@@ -50,3 +50,13 @@ export function salvarCartoesStore(listaDeCartoes)
         tx.onerror = () => reject('Erro ao salvar dados na base de dados local!');
     });
 }
+
+export function excluirCartoesStore()
+{
+    return new Promise(function(resolve, reject) {
+        const tx = db.transaction('store_cartoes', 'readwrite');
+        tx.objectStore('store_cartoes').clear();
+        tx.oncomplete = () => resolve('Cartões locais excluídos com sucesso!');
+        tx.onerror = () => reject('Erro ao excluir os cartões locais!');
+    });
+}

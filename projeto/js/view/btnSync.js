@@ -1,5 +1,5 @@
 import { salvarCartoesServidor } from "../services/CeepService.js";
-import { salvarCartoesStore } from "../storage/db.js";
+import { excluirCartoesStore, salvarCartoesStore } from "../storage/db.js";
 import { getCartoes } from "./mural.js";
 import { notificar } from "./notificacao.js";
 
@@ -14,6 +14,7 @@ btnSync.addEventListener('click', async function() {
     try 
     {
         mensagem = await salvarCartoesServidor(listaCartoesMural);
+        await excluirCartoesStore();
     }
     catch(e)
     {
@@ -24,3 +25,13 @@ btnSync.addEventListener('click', async function() {
     btnSync.disabled = false;
     btnSync.classList.replace('botaoSync--esperando', 'botaoSync--sincronizado');
 });
+
+export function sincronizar()
+{
+    if (confirm('Gostaria de carregar os dados do servidor?')) {
+        window.location.reload();
+    }
+    else if (confirm('Gostaria de salvar a versão atual do mural?')) {
+        btnSync.click();
+    }
+}
