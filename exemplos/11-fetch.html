@@ -1,5 +1,5 @@
 <meta charset="utf-8" />
-<h1>AJAX Clássico</h1>
+<h1>AJAX com Fetch API</h1>
 
 <button id="btnCarregar">
     Carregar
@@ -18,23 +18,22 @@
     const divConteudo = document.querySelector('.conteudoCarregado');
 
     btnCarregar.addEventListener('click', function() {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://jhonatanjacinto.dev/teste.php');
-        xhr.send();
         btnCarregar.disabled = true;
         btnCarregar.textContent = 'Carregando...';
-        
-        xhr.addEventListener('load', function() {
-            btnCarregar.disabled = false;
-            btnCarregar.textContent = 'Carregar';
-            divConteudo.innerHTML = xhr.response;
-        });
 
-        xhr.addEventListener('error', function(erro) {
-            btnCarregar.disabled = false;
-            btnCarregar.textContent = 'Carregar';
-            alert('Deu ruim no carregamento dos dados!');
+        fetch('https://jhonatanjacinto.dev/teste.php').then(function(resposta) {
+            return resposta.text();
+        })
+        .then(function(textoCarregado) {
+            divConteudo.innerHTML = textoCarregado;
+        })
+        .catch(function(erro) {
+            alert('Deu ruim no carregamento das informações!');
             console.error(erro);
+        })
+        .finally(function() {
+            btnCarregar.textContent = 'Carregar';
+            btnCarregar.disabled = false;
         });
     });
 
