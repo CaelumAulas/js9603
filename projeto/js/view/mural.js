@@ -5,13 +5,15 @@ let numeroCartao = 0;
 /**
  * Adiciona um novo cartão no mural
  * @param {string} conteudo     Texto do cartão que será criado
+ * @param {string} cor          Cor que será atribuída ao cartão
  * @return {void}
  */
-export function adicionarCartao(conteudo)
+export function adicionarCartao(conteudo, cor = '')
 {
     numeroCartao++;
     const cartao = cartaoModelo.cloneNode(true);
     cartao.innerHTML = cartao.innerHTML.replaceAll('{{NUMERO_CARTAO}}', numeroCartao).replace('{{CONTEUDO_CARTAO}}', conteudo);
+    cartao.style.backgroundColor = cor;
     mural.append(cartao);
 }
 

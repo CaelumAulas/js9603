@@ -1,15 +1,13 @@
 import { adicionarCartao } from "./mural.js";
 
 const btn = document.querySelector('#btnAjuda');
-btn.addEventListener( 'click', function() {
-    const mensagens = [
-        'Bem-vindo ao CEEP!',
-        'Clique no botão "?" para Ajuda',
-        'Clique no botão "Linhas" para mudar a exibição dos cartões'
-    ];
+btn.addEventListener( 'click', async function() {
+    const resposta = await fetch('http://wd47-ceep.herokuapp.com/get-instrucoes.php');
+    const dadosCarregados = await resposta.json();
+    const mensagens = dadosCarregados.instrucoes;
 
     for (let msg of mensagens) {
-        adicionarCartao(msg);
+        adicionarCartao(msg.conteudo, msg.cor);
     }
 
 } );
