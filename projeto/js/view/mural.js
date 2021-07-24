@@ -6,9 +6,7 @@ let numeroCartao = 0;
 
 window.addEventListener('load', async function() {
     const cartoes = await getCartoesServidor();
-    
-    for (let cartao of cartoes)
-    {
+    for (let cartao of cartoes) {
         adicionarCartao(cartao.conteudo, cartao.cor);
     }
 });
