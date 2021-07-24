@@ -1,6 +1,17 @@
+import { getCartoesServidor } from "../services/CeepService.js";
+
 const mural = document.querySelector('.mural');
 const cartaoModelo = document.querySelector('#template-cartao').content.firstElementChild;
 let numeroCartao = 0;
+
+window.addEventListener('load', async function() {
+    const cartoes = await getCartoesServidor();
+    
+    for (let cartao of cartoes)
+    {
+        adicionarCartao(cartao.conteudo, cartao.cor);
+    }
+});
 
 /**
  * Adiciona um novo cartão no mural
@@ -15,6 +26,23 @@ export function adicionarCartao(conteudo, cor = '')
     cartao.innerHTML = cartao.innerHTML.replaceAll('{{NUMERO_CARTAO}}', numeroCartao).replace('{{CONTEUDO_CARTAO}}', conteudo);
     cartao.style.backgroundColor = cor;
     mural.append(cartao);
+}
+
+/**
+ * Retornar a lista de cartões do Mural 
+ * @return {Array}
+ */
+export function getCartoes()
+{
+    const cartoes = mural.querySelectorAll('.cartao');
+    const listaCartoes = Array.from(cartoes).map(cartao => {
+        return {
+            conteudo: cartao.querySelector('.cartao-conteudo').textContent,
+            cor: cartao.style.backgroundColor
+        }
+    });
+
+    return listaCartoes;
 }
 
 export function toggleLayout() 
