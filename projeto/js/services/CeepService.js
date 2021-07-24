@@ -26,29 +26,21 @@ export async function salvarCartoesServidor( listaDeCartoes )
         cartoes: listaDeCartoes
     }
 
-    try 
-    {
-        const resposta = await fetch(CEEP_API_URL + '/salvar-cartoes.php', {
-            method: 'POST',
-            headers: {
-                'Content-type' : 'application/json'
-            },
-            body: JSON.stringify(infoUsuario)
-        });
+    const resposta = await fetch(CEEP_API_URL + '/salvar-cartoes.php', {
+        method: 'POST',
+        headers: {
+            'Content-type' : 'application/json'
+        },
+        body: JSON.stringify(infoUsuario)
+    });
 
-        const dadosRetornados = await resposta.json();
+    const dadosRetornados = await resposta.json();
 
-        if (dadosRetornados.quantidade == 1) {
-            return 'Cartão salvo com sucesso!';
-        }
-        else {
-            return dadosRetornados.quantidade + ' cartões salvos com sucesso!';
-        }
+    if (dadosRetornados.quantidade == 1) {
+        return 'Cartão salvo com sucesso!';
     }
-    catch(e) 
-    {
-        console.error(e);
-        return 'Erro ao enviar informações para o servidor!';
+    else {
+        return dadosRetornados.quantidade + ' cartões salvos com sucesso!';
     }
 }
 

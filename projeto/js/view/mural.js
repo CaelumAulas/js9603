@@ -1,14 +1,33 @@
 import { getCartoesServidor } from "../services/CeepService.js";
+import { IDBSubscribeOnLoadCartoes } from "../storage/db.js";
+import { notificar } from "./notificacao.js";
 
 const mural = document.querySelector('.mural');
 const cartaoModelo = document.querySelector('#template-cartao').content.firstElementChild;
 let numeroCartao = 0;
 
-window.addEventListener('load', async function() {
-    const cartoes = await getCartoesServidor();
-    for (let cartao of cartoes) {
-        adicionarCartao(cartao.conteudo, cartao.cor);
+IDBSubscribeOnLoadCartoes(async function(cartoesLocais) {
+    let listaCartoes = [];
+
+    try 
+    {
+        listaCartoes = await getCartoesServidor();
+        if (cartoesLocais.length > 0 && confirm('Você possui cartões salvos localmente.\nDeseja exibi-los no mural também?')) {
+            listaCartoes.push(...cartoesLocais);
+        }
     }
+    catch(e)
+    {
+        listaCartoes = cartoesLocais;
+        if (!listaCartoes.length) {
+            notificar('Não há cartões salvos localmente para serem exibidos!');
+        }
+    }
+
+    mural.innerHTML = '';
+    listaCartoes.forEach(cartao => {
+        adicionarCartao(cartao.conteudo, cartao.cor);
+    });
 });
 
 /**
